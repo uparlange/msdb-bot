@@ -8,7 +8,7 @@ module.exports = {
                 .title('L10N_MAME_TITLE')
                 .text('L10N_MAME_DESCRIPTION')
                 .images([
-                    builder.CardImage.create(session, 'http://localhost:' + process.env.PORT + '/public/images/msdb_capture.png')
+                    builder.CardImage.create(session, process.env.DEPLOY_URL + ':' + process.env.PORT + '/public/images/msdb_capture.png')
                 ])
                 .buttons([
                     builder.CardAction.openUrl(session, 'https://msdb.lapli.fr', 'L10N_CONSULT')
