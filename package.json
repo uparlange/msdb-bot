@@ -1,0 +1,19 @@
+{
+  "name": "msdb-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "debug": "nodemon app.js"
+  },
+  "author": "Ugo Parlange",
+  "license": "ISC",
+  "dependencies": {
+    "botbuilder": "3.5.3",
+    "dotenv-extended": "1.0.4",
+    "nodemon": "1.11.0",
+    "request": "^2.79.0",
+    "request-promise": "^4.1.1",
+    "restify": "4.3.0"
+  }
+}
