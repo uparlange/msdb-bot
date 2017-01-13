@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "debug": "nodemon app.js"
+    "debug": "nodemon app.js",
+    "start": "node app.js"
   },
   "author": "Ugo Parlange",
   "license": "ISC",
