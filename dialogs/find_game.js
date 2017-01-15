@@ -3,6 +3,8 @@ const rp = require('request-promise');
 
 const baseUrl = 'https://msdb.lapli.fr/php/services';
 
+let token = null;
+
 const getInitUrl = function () {
     return baseUrl + '/init.php';
 };
@@ -11,16 +13,34 @@ const getSearchUrl = function (gameName) {
     return baseUrl + '/search.php?params={"description":"' + gameName + '"}'
 }
 
+const getToken = function (callback) {
+    if (token === null) {
+        rp({
+            uri: getInitUrl(),
+            json: true
+        }).then(function (result) {
+            token = result.data.token;
+            callback(token);
+        });
+    }
+    else {
+        callback(token);
+    }
+}
+
 const findGames = function (gameName, callback) {
-    const games = [];
-    rp({ uri: getInitUrl(), json: true }).then(function (result) {
-        rp({ uri: getSearchUrl(gameName), json: true }).then(function (result) {
+    getToken((token) => {
+        rp({
+            uri: getSearchUrl(gameName),
+            json: true,
+            headers: {
+                'Authorization': token
+            }
+        }).then(function (result) {
             callback(result.data);
         }).catch(function (err) {
             callback(games);
         });
-    }).catch(function (err) {
-        callback(games);
     });
 }
 
