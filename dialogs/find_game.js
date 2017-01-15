@@ -9,8 +9,8 @@ const getInitUrl = function () {
     return baseUrl + '/init.php';
 };
 
-const getSearchUrl = function (gameName) {
-    return baseUrl + '/search.php?params={"description":"' + gameName + '"}'
+const getSearchUrl = function (gameName, token) {
+    return baseUrl + '/search.php?params={"description":"' + gameName + '"}&token=' + token
 }
 
 const getToken = function (callback) {
@@ -31,11 +31,8 @@ const getToken = function (callback) {
 const findGames = function (gameName, callback) {
     getToken((token) => {
         rp({
-            uri: getSearchUrl(gameName),
-            json: true,
-            headers: {
-                'Authorization': token
-            }
+            uri: getSearchUrl(gameName, token),
+            json: true
         }).then(function (result) {
             callback(result.data);
         }).catch(function (err) {
