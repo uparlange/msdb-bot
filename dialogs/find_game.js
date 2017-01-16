@@ -1,37 +1,23 @@
 const builder = require('botbuilder');
-const rp = require('request-promise');
-
-const BASE_URL = 'https://msdb.lapli.fr/php/services';
+const L10nUtils = require('./../utils/L10nUtils');
+const HttpUtils = require('./../utils/HttpUtils');
+const UrlUtils = require('./../utils/UrlUtils');
 
 const MAX_DISPLAYED_ITEMS = 5;
 
-const getInitUrl = function () {
-    return BASE_URL + '/init.php';
-};
-
-const getSearchUrl = function (gameName, token) {
-    return BASE_URL + '/search.php?params={"description":"' + gameName + '"}&token=' + token
-}
-
 const getToken = function (callback) {
-    rp({
-        uri: getInitUrl(),
-        json: true
-    }).then(function (result) {
+    const options = { uri: UrlUtils.getInitUrl() };
+    HttpUtils.get(options, (result) => {
         callback(result.data.token);
     });
 }
 
 const findGames = function (gameName, callback) {
     getToken((token) => {
-        rp({
-            uri: getSearchUrl(gameName, token),
-            json: true
-        }).then(function (result) {
+        const options = { uri: UrlUtils.getSearchUrl(gameName, token) };
+        HttpUtils.get(options, (result) => {
             callback(result.data);
-        }).catch(function (err) {
-            callback(games);
-        });
+        }, []);
     });
 }
 
@@ -44,7 +30,9 @@ module.exports = {
         function (session, results) {
             session.sendTyping();
             findGames(results.response, (games) => {
-                if (games.length > 0) {
+                const gamesCount = games.length;
+                if (gamesCount > 0) {
+                    session.send(L10nUtils.getLabel(session, 'L10N_GAMES_FOUND', [gamesCount, MAX_DISPLAYED_ITEMS]));
                     const cards = [];
                     games.forEach((element, index, array) => {
                         if (index < MAX_DISPLAYED_ITEMS) {
@@ -66,22 +54,15 @@ module.exports = {
                 else {
                     session.send('L10N_NO_RESULT');
                 }
-                const L10N_YES = session.localizer.gettext(session.preferredLocale(), "L10N_YES");
-                const L10N_NO = session.localizer.gettext(session.preferredLocale(), "L10N_NO");
-                const card = new builder.HeroCard(session)
-                    .title('L10N_PROMPT_NEW_SEARCH')
-                    .buttons([
-                        builder.CardAction.imBack(session, L10N_YES, L10N_YES),
-                        builder.CardAction.imBack(session, L10N_NO, L10N_NO)
-                    ]);
-                const msg = new builder.Message(session).addAttachment(card);
-                builder.Prompts.choice(session, msg, [L10N_YES, L10N_NO]);
+                const L10N_YES = L10nUtils.getLabel(session, "L10N_YES");
+                const L10N_NO = L10nUtils.getLabel(session, "L10N_NO");
+                builder.Prompts.choice(session, 'L10N_PROMPT_NEW_SEARCH', [L10N_YES, L10N_NO]);
             });
         },
         function (session, results) {
             const selection = results.response.entity;
-            const L10N_YES = session.localizer.gettext(session.preferredLocale(), "L10N_YES");
-            const L10N_NO = session.localizer.gettext(session.preferredLocale(), "L10N_NO");
+            const L10N_YES = L10nUtils.getLabel(session, "L10N_YES");
+            const L10N_NO = L10nUtils.getLabel(session, "L10N_NO");
             switch (selection) {
                 case L10N_YES:
                     session.replaceDialog('DIALOG_FIND_GAME');

@@ -1,14 +1,15 @@
 {
     "L10N_HELLO": "Bonjour !",
-    "L10N_CONSULT": "Accéder",
+    "L10N_CONSULT": "Consulter",
     "L10N_PROMPT_SELECT_ACTIVITY": "Que voulez-vous faire ?",
-    "L10N_INVALID_CHOICE": "Oups... je n'ai pas compris ce que vous voulez",
+    "L10N_INVALID_CHOICE": "Désolé, je n'ai pas compris :-(",
     "L10N_FIND_GAME": "Rechercher un jeu",
     "L10N_PROMPT_GAME_NAME": "Quel est le nom du jeu ?",
-    "L10N_NO_RESULT": "Désolé je n'ai rien trouvé :-(",
+    "L10N_NO_RESULT": "Désolé, je n'ai rien trouvé :-(",
     "L10N_PROMPT_NEW_SEARCH": "Voulez vous faire une nouvelle recherche ?",
     "L10N_YES": "Oui",
     "L10N_NO": "Non",
     "L10N_MAME_TITLE": "Mame Smart DataBase",
-    "L10N_MAME_DESCRIPTION": "MAME (Multiple Arcade Machine Emulator) est un émulateur de jeux d'arcade. La liste des jeux est telle qu'il est considéré comme une sorte de grande bibliothèque ou de 'mémoire' du jeu d'arcade. Cette application répertorie les fiches des jeux (ROMS) pour une version de MAME donnée."
+    "L10N_MAME_DESCRIPTION": "MAME (Multiple Arcade Machine Emulator) est un émulateur de jeux d'arcade. La liste des jeux est telle qu'il est considéré comme une sorte de grande bibliothèque ou de 'mémoire' du jeu d'arcade. Cette application répertorie les fiches des jeux (ROMS) pour une version de MAME donnée.",
+    "L10N_GAMES_FOUND": "J'ai trouvé {0} jeux, je vous affiche les {1} plus pertinents."
 }
