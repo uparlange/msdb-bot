@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "debug": "nodemon app.js",
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "gulp test"
   },
   "author": "Ugo Parlange",
   "license": "ISC",
@@ -16,5 +17,10 @@
     "request": "^2.79.0",
     "request-promise": "^4.1.1",
     "restify": "4.3.0"
+  },
+  "devDependencies": {
+    "gulp": "3.9.1",
+    "gulp-eslint": "3.0.1",
+    "run-sequence": "1.2.2"
   }
 }
