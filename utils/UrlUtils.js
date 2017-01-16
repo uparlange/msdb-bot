@@ -1,10 +1,17 @@
-const BASE_URL = 'https://msdb.lapli.fr/php/services';
+const BASE_URL = 'https://msdb.lapli.fr';
+const BASE_SERVIVE_URL = BASE_URL + '/php/services';
 
 module.exports = {
-    getInitUrl: function () {
-        return BASE_URL + '/init.php';
+    getInitServiceUrl: function () {
+        return BASE_SERVIVE_URL + '/init.php';
     },
-    getSearchUrl: function (gameName, token) {
-        return BASE_URL + '/search.php?params={"description":"' + gameName + '"}&token=' + token;
+    getSearchServiceUrl: function (gameName, token) {
+        return BASE_SERVIVE_URL + '/search.php?params={"description":"' + gameName + '"}&token=' + token;
+    },
+    getGameSnapUrl: function (gameName) {
+        return BASE_URL + '/games/' + gameName + '/snap.png';
+    },
+    getGameDetailUrl: function (gameName) {
+        return BASE_URL + '/#/detail?name=' + gameName;
     }
 };

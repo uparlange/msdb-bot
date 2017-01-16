@@ -6,7 +6,7 @@ const UrlUtils = require('./../utils/UrlUtils');
 const MAX_DISPLAYED_ITEMS = 5;
 
 const getToken = function (callback) {
-    const options = { uri: UrlUtils.getInitUrl() };
+    const options = { uri: UrlUtils.getInitServiceUrl() };
     HttpUtils.get(options, (result) => {
         callback(result.data.token);
     });
@@ -14,7 +14,7 @@ const getToken = function (callback) {
 
 const findGames = function (gameName, callback) {
     getToken((token) => {
-        const options = { uri: UrlUtils.getSearchUrl(gameName, token) };
+        const options = { uri: UrlUtils.getSearchServiceUrl(encodeURIComponent(gameName), token) };
         HttpUtils.get(options, (result) => {
             callback(result.data);
         }, []);
@@ -35,14 +35,14 @@ module.exports = {
                     session.send(L10nUtils.getLabel(session, 'L10N_GAMES_FOUND', [gamesCount, MAX_DISPLAYED_ITEMS]));
                     const cards = [];
                     games.forEach((element, index, array) => {
-                        if (index < MAX_DISPLAYED_ITEMS) {
+                        if (element.cloneof === null && index < MAX_DISPLAYED_ITEMS) {
                             cards.push(new builder.HeroCard(session)
                                 .title(element.description)
                                 .images([
-                                    builder.CardImage.create(session, 'https://msdb.lapli.fr/games/' + element.name + '/titles.png')
+                                    builder.CardImage.create(session, UrlUtils.getGameSnapUrl(element.name))
                                 ])
                                 .buttons([
-                                    builder.CardAction.openUrl(session, 'https://msdb.lapli.fr/#/detail?name=' + element.name, 'L10N_CONSULT')
+                                    builder.CardAction.openUrl(session, UrlUtils.getGameDetailUrl(element.name), 'L10N_CONSULT')
                                 ]));
                         }
                     });
