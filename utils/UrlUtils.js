@@ -1,7 +1,10 @@
-const BASE_URL = 'https://msdb.lapli.fr';
-const BASE_SERVIVE_URL = BASE_URL + '/php/services';
-
 module.exports = {
+    getBaseUrl: function () {
+        return 'https://msdb.lapli.fr';
+    },
+    getBaseServiceUrl: function () {
+        return this.getBaseUrl() + '/php/services';
+    },
     getInitServiceUrl: function () {
         return BASE_SERVIVE_URL + '/init.php';
     },
@@ -16,5 +19,8 @@ module.exports = {
     },
     getGameDetailUrl: function (gameName) {
         return BASE_URL + '/#/detail?name=' + gameName;
+    },
+    getLocalImageUrl: function (image) {
+        return process.env.PUBLIC_URL + '/images/' + image;
     }
 };

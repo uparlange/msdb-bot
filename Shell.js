@@ -36,6 +36,7 @@ module.exports = {
         bot.set('localizerSettings', {
             defaultLocale: locale
         });
+        // TODO reload recognizers ?
     },
     getLocale: function () {
         const localizerSettings = bot.get('localizerSettings');
@@ -64,6 +65,7 @@ module.exports = {
             if (desc.triggerAction !== undefined) {
                 dialog.triggerAction(desc.triggerAction);
             }
+            dialog.beginDialogAction(desc.label + '_HELP', 'DIALOG_HELP', { matches: 'INTENT_HELP' });
         });
     },
     _initLogs: function () {

@@ -1,11 +1,14 @@
 const builder = require('botbuilder');
 
 module.exports = {
-    label: 'DialogHelp',
+    label: 'DIALOG_HELP',
     dialog: [
         function (session, args) {
-            session.send("Aide");
-            session.endDialog();
+            switch (args.action) {
+                default:
+                    session.endDialog(args.action);
+                    break;
+            }
         }
     ],
     triggerAction: { matches: 'INTENT_HELP' }

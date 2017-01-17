@@ -1,17 +1,18 @@
 const builder = require('botbuilder');
+const UrlUtils = require('./../utils/UrlUtils');
 
 module.exports = {
-    label: 'DialogInfo',
+    label: 'DIALOG_INFO',
     dialog: [
         function (session, args) {
             const card = new builder.HeroCard(session)
                 .title('L10N_MAME_TITLE')
                 .text('L10N_MAME_DESCRIPTION')
                 .images([
-                    builder.CardImage.create(session, process.env.PUBLIC_URL + '/images/msdb_capture.png')
+                    builder.CardImage.create(session, UrlUtils.getLocalImageUrl('msdb_capture.png'))
                 ])
                 .buttons([
-                    builder.CardAction.openUrl(session, 'https://msdb.lapli.fr', 'L10N_CONSULT')
+                    builder.CardAction.openUrl(session, UrlUtils.getBaseUrl(), 'L10N_CONSULT')
                 ]);
             const msg = new builder.Message(session).addAttachment(card);
             session.send(msg);
