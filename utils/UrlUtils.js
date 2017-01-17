@@ -6,19 +6,19 @@ module.exports = {
         return this.getBaseUrl() + '/php/services';
     },
     getInitServiceUrl: function () {
-        return BASE_SERVIVE_URL + '/init.php';
+        return this.getBaseServiceUrl() + '/init.php';
     },
     getSearchServiceUrl: function (gameName, token) {
-        return BASE_SERVIVE_URL + '/search.php?params={"description":"' + gameName + '"}&token=' + token;
+        return this.getBaseServiceUrl() + '/search.php?params={"description":"' + gameName + '"}&token=' + token;
     },
     getGameSnapUrl: function (gameName) {
-        return BASE_URL + '/games/' + gameName + '/snap.png';
+        return this.getBaseUrl() + '/games/' + gameName + '/snap.png';
     },
     getGameTitlesUrl: function (gameName) {
-        return BASE_URL + '/games/' + gameName + '/titles.png';
+        return this.getBaseUrl() + '/games/' + gameName + '/titles.png';
     },
     getGameDetailUrl: function (gameName) {
-        return BASE_URL + '/#/detail?name=' + gameName;
+        return this.getBaseUrl() + '/#/detail?name=' + gameName;
     },
     getLocalImageUrl: function (image) {
         return process.env.PUBLIC_URL + '/images/' + image;
