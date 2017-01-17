@@ -12,7 +12,9 @@
     "L10N_MAME_TITLE": "Mame Smart DataBase",
     "L10N_MAME_DESCRIPTION": "MAME (Multiple Arcade Machine Emulator) est un émulateur de jeux d'arcade. La liste des jeux est telle qu'il est considéré comme une sorte de grande bibliothèque ou de 'mémoire' du jeu d'arcade. Cette application répertorie les fiches des jeux (ROMS) pour une version de MAME donnée.",
     "L10N_GAMES_FOUND": "J'ai trouvé {0} jeux, je vous affiche les {1} plus pertinents.",
+    "L10N_GOODBYE": "Merci. A plus !",
     "L10N_REGEXP_FIND_GAME": "(trouver|jouer|rechercher)",
     "L10N_REGEXP_HELP": "(aide)",
-    "L10N_REGEXP_INFO": "(info|information)"
+    "L10N_REGEXP_INFO": "(info|information)",
+    "L10N_REGEXP_GOODBYE": "(au revoir|a plus)"
 }
