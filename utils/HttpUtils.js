@@ -3,7 +3,7 @@ const rp = require('request-promise');
 const call = function (options, callback, defaultValue) {
     rp(options).then((result) => {
         callback(result);
-    }).catch((err) => {
+    }).catch(() => {
         callback(defaultValue || null);
     });
 };

@@ -1,9 +1,7 @@
-const builder = require('botbuilder');
-
 module.exports = {
     label: '/',
     dialog: [
-        function (session, args) {
+        function (session) {
             session.send("L10N_HELLO");
             session.beginDialog("DIALOG_MENU");
         }

@@ -4,7 +4,7 @@ const UrlUtils = require('./../utils/UrlUtils');
 module.exports = {
     label: 'DIALOG_INFO',
     dialog: [
-        function (session, args) {
+        function (session) {
             const card = new builder.HeroCard(session)
                 .title('L10N_MAME_TITLE')
                 .text('L10N_MAME_DESCRIPTION')

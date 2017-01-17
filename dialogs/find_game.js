@@ -24,7 +24,7 @@ const findGames = function (gameName, callback) {
 module.exports = {
     label: 'DIALOG_FIND_GAME',
     dialog: [
-        function (session, args) {
+        function (session) {
             builder.Prompts.text(session, 'L10N_PROMPT_GAME_NAME');
         },
         function (session, results) {
@@ -34,7 +34,7 @@ module.exports = {
                 if (gamesCount > 0) {
                     session.send(Shell.getLabel('L10N_GAMES_FOUND', [gamesCount, Math.min(MAX_DISPLAYED_ITEMS, gamesCount)]));
                     const cards = [];
-                    games.forEach((element, index, array) => {
+                    games.forEach((element, index) => {
                         if (index < MAX_DISPLAYED_ITEMS) {
                             cards.push(new builder.HeroCard(session)
                                 .title(element.description)
@@ -73,5 +73,6 @@ module.exports = {
             }
         }
     ],
-    triggerAction: { matches: 'INTENT_FIND_GAME' }
+    triggerAction: { matches: 'INTENT_FIND_GAME' },
+    cancelAction: { matches: 'INTENT_CANCEL', confirmPrompt: Shell.getLabel('L10N_CONFIRM_CANCEL') }
 };

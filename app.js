@@ -1,3 +1,6 @@
+/*eslint no-undef: "error"*/
+/*eslint-env node*/
+
 const restify = require('restify');
 const builder = require('botbuilder');
 const Shell = require('./Shell');
@@ -18,9 +21,7 @@ Shell.init(bot);
 // init server
 
 const server = restify.createServer();
-server.listen(process.env.PORT, function () {
-    console.log('%s listening to %s', server.name, server.url);
-});
+server.listen(process.env.PORT);
 server.post('/api/messages', connector.listen());
 server.get(/\/public\/?.*/, restify.serveStatic({
     directory: __dirname

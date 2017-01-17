@@ -21,6 +21,7 @@
   "devDependencies": {
     "gulp": "3.9.1",
     "gulp-eslint": "3.0.1",
+    "eslint-plugin-node":"3.0.5",
     "run-sequence": "1.2.2"
   }
 }

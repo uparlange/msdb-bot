@@ -26,7 +26,7 @@ module.exports = {
         const labels = require('./locale/' + locale + '/index.json');
         let label = labels[key] || key;
         if (Array.isArray(params)) {
-            params.forEach((element, index, array) => {
+            params.forEach((element, index) => {
                 label = label.replace('{' + index + '}', element)
             });
         }
@@ -44,7 +44,7 @@ module.exports = {
     },
     _initEvents: function () {
         const files = fs.readdirSync(EVENTS_DIR);
-        files.forEach((element, index, array) => {
+        files.forEach((element) => {
             const desc = require(EVENTS_DIR + '/' + element);
             const eventName = element.replace('js', '');
             bot.on(eventName, desc.handler);
@@ -52,18 +52,24 @@ module.exports = {
     },
     _initRecognizers: function () {
         const files = fs.readdirSync(RECOGNIZERS_DIR);
-        files.forEach((element, index, array) => {
+        files.forEach((element) => {
             const desc = require(RECOGNIZERS_DIR + '/' + element);
             bot.recognizer(desc.recognizer);
         });
     },
     _initDialogs: function () {
         const files = fs.readdirSync(DIALOGS_DIR);
-        files.forEach((element, index, array) => {
+        files.forEach((element) => {
             const desc = require(DIALOGS_DIR + '/' + element);
             const dialog = bot.dialog(desc.label, desc.dialog);
             if (desc.triggerAction !== undefined) {
                 dialog.triggerAction(desc.triggerAction);
+            }
+            if (desc.cancelAction !== undefined) {
+                dialog.cancelAction(desc.label + '_CANCEL', desc.cancelAction.message, {
+                    matches: desc.cancelAction.matches,
+                    confirmPrompt: desc.cancelAction.confirmPrompt
+                });
             }
             dialog.beginDialogAction(desc.label + '_HELP', 'DIALOG_HELP', { matches: 'INTENT_HELP' });
         });

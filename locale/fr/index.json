@@ -16,5 +16,8 @@
     "L10N_REGEXP_FIND_GAME": "(trouver|jouer|rechercher)",
     "L10N_REGEXP_HELP": "(aide)",
     "L10N_REGEXP_INFO": "(info|information)",
-    "L10N_REGEXP_GOODBYE": "(au revoir|a plus)"
+    "L10N_REGEXP_GOODBYE": "(au revoir|a plus)",
+    "L10N_REGEXP_CANCEL": "(annuler)",
+    "L10N_NO_CONTEXTUAL_HELP": "Pour le coup je ne sais pas comment vous aider...",
+    "L10N_CONFIRM_CANCEL": "Etes-vous sur de vouloir annuler ?"
 }
