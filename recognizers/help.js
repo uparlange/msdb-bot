@@ -1,4 +1,3 @@
-const builder = require('botbuilder');
 const Shell = require('./../Shell');
 
 module.exports = {
