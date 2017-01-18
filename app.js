@@ -1,6 +1,3 @@
-/*eslint no-undef: "error"*/
-/*eslint-env node*/
-
 const restify = require('restify');
 const builder = require('botbuilder');
 const Shell = require('./Shell');
