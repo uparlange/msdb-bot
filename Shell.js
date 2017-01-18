@@ -94,7 +94,7 @@ module.exports = {
         });
     },
     _initEndConversation: function () {
-        bot.endConversationAction('DIALOG_GOODBYE', this.getLabel('L10N_SEE_YOU_LATER'), { matches: 'INTENT_GOODBYE' });
+        bot.endConversationAction('DIALOG_GOODBYE', 'L10N_SEE_YOU_LATER', { matches: 'INTENT_GOODBYE' });
     },
     _initLogs: function () {
         bot.use({
