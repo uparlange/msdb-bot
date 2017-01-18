@@ -5,13 +5,15 @@ const RECOGNIZERS_DIR = './recognizers';
 const DIALOGS_DIR = './dialogs';
 
 let bot = null;
-let defaultLocale = 'fr';
+let preferredLocale = 'fr';
 
 module.exports = {
     init: function (botInstance) {
         bot = botInstance;
 
-        this.setLocale(defaultLocale);
+        bot.set('localizerSettings', {
+            defaultLocale: preferredLocale
+        });
 
         this._initEvents();
 
@@ -19,7 +21,19 @@ module.exports = {
 
         this._initDialogs();
 
+        this._initEndConversation();
+
         this._initLogs();
+    },
+    checkIntent: function (message, regExpKey, intentName) {
+        let intent = { score: 0.0 };
+        if (message) {
+            const regExp = new RegExp(this.getLabel(regExpKey), 'i');
+            if (message.search(regExp) !== -1) {
+                intent = { score: 1.0, intent: intentName };
+            }
+        }
+        return intent;
     },
     getLabel: function (key, params) {
         const locale = this.getLocale();
@@ -32,15 +46,18 @@ module.exports = {
         }
         return label;
     },
-    setLocale: function (locale) {
-        bot.set('localizerSettings', {
-            defaultLocale: locale
+    setLocale: function (session, locale, callback) {
+        session.preferredLocale(locale, (err) => {
+            if (err) {
+                // TODO log ?
+            } else {
+                preferredLocale = locale;
+            }
+            callback();
         });
-        // TODO reload recognizers ?
     },
     getLocale: function () {
-        const localizerSettings = bot.get('localizerSettings');
-        return localizerSettings.defaultLocale;
+        return preferredLocale;
     },
     _initEvents: function () {
         const files = fs.readdirSync(EVENTS_DIR);
@@ -73,6 +90,9 @@ module.exports = {
             }
             dialog.beginDialogAction(desc.label + '_HELP', 'DIALOG_HELP', { matches: 'INTENT_HELP' });
         });
+    },
+    _initEndConversation: function () {
+        bot.endConversationAction('DIALOG_GOODBYE', this.getLabel('L10N_SEE_YOU_LATER'), { matches: 'INTENT_GOODBYE' });
     },
     _initLogs: function () {
         bot.use({
