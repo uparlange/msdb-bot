@@ -1,6 +1,6 @@
+const builder = require('botbuilder');
 const fs = require('fs');
 
-const EVENTS_DIR = './events';
 const RECOGNIZERS_DIR = './recognizers';
 const DIALOGS_DIR = './dialogs';
 
@@ -60,11 +60,18 @@ module.exports = {
         return preferredLocale;
     },
     _initEvents: function () {
-        const files = fs.readdirSync(EVENTS_DIR);
-        files.forEach((element) => {
-            const desc = require(EVENTS_DIR + '/' + element);
-            const eventName = element.replace('js', '');
-            bot.on(eventName, desc.handler);
+        bot.on('conversationUpdate', (message) => {
+            const L10N_HELLO = this.getLabel('L10N_HELLO');
+            if (message.membersAdded) {
+                message.membersAdded.forEach(identity => {
+                    if (identity.id === message.address.bot.id) {
+                        const reply = new builder.Message()
+                            .address(message.address)
+                            .text(L10N_HELLO);
+                        bot.send(reply);
+                    }
+                });
+            }
         });
     },
     _initRecognizers: function () {
@@ -82,13 +89,8 @@ module.exports = {
             if (desc.triggerAction !== undefined) {
                 dialog.triggerAction(desc.triggerAction);
             }
-            if (desc.cancelAction !== undefined) {
-                dialog.cancelAction(desc.label + '_CANCEL', desc.cancelAction.message, {
-                    matches: desc.cancelAction.matches,
-                    confirmPrompt: desc.cancelAction.confirmPrompt
-                });
-            }
             dialog.beginDialogAction(desc.label + '_HELP', 'DIALOG_HELP', { matches: 'INTENT_HELP' });
+            dialog.beginDialogAction(desc.label + '_CANCEL', 'DIALOG_CANCEL', { matches: 'INTENT_CANCEL' });
         });
     },
     _initEndConversation: function () {
