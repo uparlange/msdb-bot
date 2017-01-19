@@ -4,6 +4,8 @@ const fs = require('fs');
 const RECOGNIZERS_DIR = './recognizers';
 const DIALOGS_DIR = './dialogs';
 
+const DIALOG_MAIN = '/';
+
 let bot = null;
 let preferredLocale = 'fr';
 
@@ -24,16 +26,6 @@ module.exports = {
         this._initEndConversation();
 
         this._initLogs();
-    },
-    checkIntent: function (message, regExpKey, intentName) {
-        let intent = { score: 0.0 };
-        if (message) {
-            const regExp = new RegExp(this.getLabel(regExpKey), 'i');
-            if (message.search(regExp) !== -1) {
-                intent = { score: 1.0, intent: intentName };
-            }
-        }
-        return intent;
     },
     getLabel: function (key, params) {
         const locale = this.getLocale();
@@ -58,6 +50,12 @@ module.exports = {
     },
     getLocale: function () {
         return preferredLocale;
+    },
+    getDialogName: function (fileName) {
+        return 'DIALOG_' + fileName.toUpperCase();
+    },
+    getIntentName: function (fileName) {
+        return 'INTENT_' + fileName.toUpperCase();
     },
     _initEvents: function () {
         bot.on('conversationUpdate', (message) => {
@@ -85,16 +83,21 @@ module.exports = {
         const files = fs.readdirSync(DIALOGS_DIR);
         files.forEach((element) => {
             const desc = require(DIALOGS_DIR + '/' + element);
-            const dialog = bot.dialog(desc.label, desc.dialog);
-            if (desc.triggerAction !== undefined) {
-                dialog.triggerAction(desc.triggerAction);
+            const fileName = element.replace('.js', '');
+            let dialogName = this.getDialogName(fileName);
+            if (dialogName === this.getDialogName('MAIN')) {
+                dialogName = DIALOG_MAIN;
             }
-            dialog.beginDialogAction(desc.label + '_HELP', 'DIALOG_HELP', { matches: 'INTENT_HELP' });
-            dialog.beginDialogAction(desc.label + '_CANCEL', 'DIALOG_CANCEL', { matches: 'INTENT_CANCEL' });
+            const dialog = bot.dialog(dialogName, desc.dialog);
+            if (dialogName !== DIALOG_MAIN) {
+                dialog.triggerAction({ matches: this.getIntentName(fileName) });
+            }
+            dialog.beginDialogAction(dialogName + '_HELP', this.getDialogName('HELP'), { matches: this.getIntentName('HELP') });
+            dialog.beginDialogAction(dialogName + '_CANCEL', this.getDialogName('CANCEL'), { matches: this.getIntentName('CANCEL') });
         });
     },
     _initEndConversation: function () {
-        bot.endConversationAction('DIALOG_GOODBYE', 'L10N_SEE_YOU_LATER', { matches: 'INTENT_GOODBYE' });
+        bot.endConversationAction(this.getDialogName('GOODBYE'), 'L10N_SEE_YOU_LATER', { matches: this.getIntentName('GOODBYE') });
     },
     _initLogs: function () {
         bot.use({

@@ -5,7 +5,6 @@ const L10N_YES = Shell.getLabel('L10N_YES');
 const L10N_NO = Shell.getLabel('L10N_NO');
 
 module.exports = {
-    label: 'DIALOG_CANCEL',
     dialog: [
         function (session) {
             builder.Prompts.choice(session, 'L10N_CONFIRM_CANCEL', [L10N_YES, L10N_NO]);
@@ -21,6 +20,5 @@ module.exports = {
                     break;
             }
         }
-    ],
-    triggerAction: { matches: 'INTENT_CANCEL' }
+    ]
 };

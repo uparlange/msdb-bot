@@ -2,7 +2,6 @@ const builder = require('botbuilder');
 const Shell = require('./../Shell');
 
 module.exports = {
-    label: 'DIALOG_MENU',
     dialog: [
         function (session) {
             const L10N_FIND_GAME = Shell.getLabel('L10N_FIND_GAME');

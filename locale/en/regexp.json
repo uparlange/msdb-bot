@@ -1,0 +1,8 @@
+{
+    "REGEXP_GOODBYE": "(goodbye)",
+    "REGEXP_FIND_GAME": "(find|play)",
+    "REGEXP_HELP": "(help)",
+    "REGEXP_INFO": "(info)",
+    "REGEXP_CANCEL": "(cancel)",
+    "REGEXP_CHANGE_LANGUAGE": "(change.*language)"
+}

@@ -2,7 +2,6 @@ const builder = require('botbuilder');
 const UrlUtils = require('./../utils/UrlUtils');
 
 module.exports = {
-    label: 'DIALOG_INFO',
     dialog: [
         function (session) {
             const card = new builder.HeroCard(session)
@@ -18,6 +17,5 @@ module.exports = {
             session.send(msg);
             session.endDialog();
         }
-    ],
-    triggerAction: { matches: 'INTENT_INFO' }
+    ]
 };

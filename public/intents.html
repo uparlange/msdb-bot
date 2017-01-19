@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+</head>
+
+<body id="intents">
+    <table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>DESCRIPTION</th>
+      <th>REGEXP</th>
+      <th>DIALOG ID</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.getJSON("/api/intents", function (result) {
+                var intents = $("#intents");
+                for(var i=0; i<result.length; i++) {
+                    var intent = result[i];
+                    var line = $("<tr></tr>");
+                    line.append("<td>"+intent.id+"</td>");
+                    line.append("<td>"+intent.description+"</td>");
+                    var regexpCell = $("<td></td>");
+                    for(var j=0; j<intent.regexps.length; j++) {
+                        var regexp = intent.regexps[j];
+                        regexpCell.append(regexp.id);
+                        for(var k=0; k<regexp.values.length; k++) {
+                            var value = regexp.values[k];
+                            regexpCell.append("<br>");
+                            regexpCell.append(value.locale + " : " + value.value);
+                        }
+                    }
+                    line.append(regexpCell);
+                    line.append("<td>"+intent.id.replace("INTENT_", "DIALOG_")+"</td>");
+                    intents.find("tbody").append(line);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

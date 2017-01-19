@@ -24,7 +24,6 @@ const findGames = function (gameName, callback) {
 }
 
 module.exports = {
-    label: 'DIALOG_FIND_GAME',
     dialog: [
         function (session) {
             builder.Prompts.text(session, 'L10N_PROMPT_GAME_NAME');
@@ -70,8 +69,5 @@ module.exports = {
                     break;
             }
         }
-    ],
-    triggerAction: { 
-        matches: 'INTENT_FIND_GAME' 
-    }
+    ]
 };

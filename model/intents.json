@@ -1,0 +1,56 @@
+[
+    {
+        "description": "Rechercher un jeu",
+        "id": "INTENT_FIND_GAME",
+        "regexps": [
+            {
+                "id": "REGEXP_FIND_GAME"
+            }
+        ]
+    },
+    {
+        "description": "Arrêter la conversation",
+        "id": "INTENT_GOODBYE",
+        "regexps": [
+            {
+                "id": "REGEXP_GOODBYE"
+            }
+        ]
+    },
+    {
+        "description": "Demander de l'aide",
+        "id": "INTENT_HELP",
+        "regexps": [
+            {
+                "id": "REGEXP_HELP"
+            }
+        ]
+    },
+    {
+        "description": "Demander de l'information",
+        "id": "INTENT_INFO",
+        "regexps": [
+            {
+                "id": "REGEXP_INFO"
+            }
+        ]
+    },
+    {
+        "description": "Annuler l'action en cours",
+        "id": "INTENT_CANCEL",
+        "regexps": [
+            {
+                "id": "REGEXP_CANCEL"
+            }
+        ]
+    },
+    {
+        "description": "Mettre à jour la langue",
+        "id": "INTENT_CHANGE_LANGUAGE",
+        "regexps": [
+            {
+                "id": "REGEXP_CHANGE_LANGUAGE"
+            }
+        ]
+    }
+]
