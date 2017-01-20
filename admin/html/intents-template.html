@@ -1,0 +1,25 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>DESCRIPTION</th>
+            <th>REGEXP</th>
+            <th>DIALOG ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let intent of intents">
+            <td>{{intent.id}}</td>
+            <td>{{intent.description}}</td>
+            <td>
+                <div *ngFor="let regexp of intent.regexps">
+                    {{regexp.id}}
+                    <div *ngFor="let value of regexp.values">
+                        {{value.locale}} : {{value.value}}
+                    </div>
+                </div>
+            </td>
+            <td>{{getDialogId(intent.id)}}</td>
+        </tr>
+    </tbody>
+</table>

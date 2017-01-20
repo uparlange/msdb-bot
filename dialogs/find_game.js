@@ -25,7 +25,7 @@ const findGames = function (gameName, callback) {
 
 module.exports = {
     dialog: [
-        function (session) {
+        function (session, args) {
             builder.Prompts.text(session, 'L10N_PROMPT_GAME_NAME');
         },
         function (session, results) {

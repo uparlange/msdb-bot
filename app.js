@@ -20,11 +20,24 @@ Shell.init(bot);
 // init server
 
 const server = restify.createServer();
+
+server.use(restify.gzipResponse());
+
 server.listen(process.env.PORT);
 
 server.post('/api/messages', connector.listen());
 
 server.get(/\/public\/?.*/, restify.serveStatic({
+    directory: __dirname,
+    default: 'index.html'
+}));
+
+server.get(/\/admin\/?.*/, restify.serveStatic({
+    directory: __dirname,
+    default: 'index.html'
+}));
+
+server.get(/\/node_modules\/?.*/, restify.serveStatic({
     directory: __dirname
 }));
 

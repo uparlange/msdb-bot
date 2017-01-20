@@ -1,32 +1,44 @@
 const Shell = require('./../Shell');
 
+const getIntent = function (message) {
+    let result = null;
+    if (message) {
+        const intents = require('./../model/intents.json');
+        const regexps = require('./../locale/' + Shell.getLocale() + '/regexp.json');
+        for (var regId in regexps) {
+            if (message.search(new RegExp(regexps[regId], 'i')) !== -1) {
+                intents.forEach((intent, index) => {
+                    intent.regexps.forEach((regexp, index) => {
+                        if (regexp.id === regId) {
+                            result = {
+                                score: 1.0,
+                                intent: intent.id,
+                                entities: getEntities(message)
+                            };
+                            return;
+                        }
+                    });
+                    if (intent !== null) {
+                        return;
+                    }
+                });
+            }
+        }
+    }
+    if (result === null) {
+        result = { score: 0.0 };
+    }
+    return result;
+};
+
+const getEntities = function () {
+    return [];
+};
+
 module.exports = {
     recognizer: {
         recognize: function (context, done) {
-            let result = null;
-            if (context.message.text) {
-                const intents = require('./../model/intents.json');
-                const regexps = require('./../locale/' + Shell.getLocale() + '/regexp.json');
-                for (var regId in regexps) {
-                    if (context.message.text.search(new RegExp(regexps[regId], 'i')) !== -1) {
-                        intents.forEach((intent, index) => {
-                            intent.regexps.forEach((regexp, index) => {
-                                if (regexp.id === regId) {
-                                    result = { score: 1.0, intent: intent.id };
-                                    return;
-                                }
-                            });
-                            if (intent !== null) {
-                                return;
-                            }
-                        });
-                    }
-                }
-            }
-            if (result === null) {
-                result = { score: 0.0 };
-            }
-            done(null, result);
+            done(null, getIntent(context.message.text));
         }
     }
 };
