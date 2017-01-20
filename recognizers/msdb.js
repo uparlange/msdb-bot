@@ -7,8 +7,8 @@ const getIntent = function (message) {
         const regexps = require('./../locale/' + Shell.getLocale() + '/regexp.json');
         for (var regId in regexps) {
             if (message.search(new RegExp(regexps[regId], 'i')) !== -1) {
-                intents.forEach((intent, index) => {
-                    intent.regexps.forEach((regexp, index) => {
+                intents.forEach((intent) => {
+                    intent.regexps.forEach((regexp) => {
                         if (regexp.id === regId) {
                             result = {
                                 score: 1.0,
