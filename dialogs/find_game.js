@@ -4,8 +4,6 @@ const UrlUtils = require('./../utils/UrlUtils');
 const Shell = require('./../Shell');
 
 const MAX_DISPLAYED_ITEMS = 5;
-const L10N_YES = Shell.getLabel('L10N_YES');
-const L10N_NO = Shell.getLabel('L10N_NO');
 
 const getToken = function (callback) {
     const options = { uri: UrlUtils.getInitServiceUrl() };
@@ -24,7 +22,7 @@ const findGames = function (gameName, callback) {
 }
 
 module.exports = {
-    dialog: [
+    dialog: Shell.getDialog([
         function (session) {
             builder.Prompts.text(session, 'L10N_PROMPT_GAME_NAME');
         },
@@ -55,11 +53,15 @@ module.exports = {
                 else {
                     session.send('L10N_NO_RESULT');
                 }
+                const L10N_YES = Shell.getLabel('L10N_YES');
+                const L10N_NO = Shell.getLabel('L10N_NO');
                 builder.Prompts.choice(session, 'L10N_PROMPT_NEW_SEARCH', [L10N_YES, L10N_NO]);
             });
         },
         function (session, results) {
             const selection = results.response.entity;
+            const L10N_YES = Shell.getLabel('L10N_YES');
+            const L10N_NO = Shell.getLabel('L10N_NO');
             switch (selection) {
                 case L10N_YES:
                     session.replaceDialog('DIALOG_FIND_GAME');
@@ -69,5 +71,5 @@ module.exports = {
                     break;
             }
         }
-    ]
+    ])
 };

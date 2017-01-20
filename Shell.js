@@ -7,15 +7,12 @@ const DIALOGS_DIR = './dialogs';
 const DIALOG_MAIN = '/';
 
 let bot = null;
-let preferredLocale = 'fr';
+let locales = ['fr', 'en'];
+let preferredLocale = locales[0];
 
 module.exports = {
     init: function (botInstance) {
         bot = botInstance;
-
-        bot.set('localizerSettings', {
-            defaultLocale: preferredLocale
-        });
 
         this._initEvents();
 
@@ -26,6 +23,18 @@ module.exports = {
         this._initEndConversation();
 
         this._initLogs();
+    },
+    getDialog: function (dialog) {
+        dialog.unshift((session, args, next) => {
+            const spl = session.preferredLocale();
+            if (locales.indexOf(spl) === -1) {
+                this.setLocale(preferredLocale);
+            } else if (spl !== preferredLocale) {
+                preferredLocale = spl;
+            }
+            next();
+        });
+        return dialog;
     },
     getLabel: function (key, params) {
         const locale = this.getLocale();
@@ -59,6 +68,7 @@ module.exports = {
     },
     _initEvents: function () {
         bot.on('conversationUpdate', (message) => {
+            /*
             const L10N_HELLO = this.getLabel('L10N_HELLO');
             if (message.membersAdded) {
                 message.membersAdded.forEach(identity => {
@@ -70,6 +80,7 @@ module.exports = {
                     }
                 });
             }
+            */
         });
     },
     _initRecognizers: function () {

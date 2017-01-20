@@ -1,8 +1,9 @@
 const builder = require('botbuilder');
 const UrlUtils = require('./../utils/UrlUtils');
+const Shell = require('./../Shell');
 
 module.exports = {
-    dialog: [
+    dialog: Shell.getDialog([
         function (session) {
             const card = new builder.HeroCard(session)
                 .title('L10N_MAME_TITLE')
@@ -17,5 +18,5 @@ module.exports = {
             session.send(msg);
             session.endDialog();
         }
-    ]
+    ])
 };

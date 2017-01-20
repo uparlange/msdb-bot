@@ -1,7 +1,7 @@
 const Shell = require('./../Shell');
 
 module.exports = {
-    dialog: [
+    dialog: Shell.getDialog([
         function (session, args) {
             const label = Shell.getLabel(args.action);
             if (label !== args.action) {
@@ -10,5 +10,5 @@ module.exports = {
                 session.endDialog('L10N_NO_CONTEXTUAL_HELP');
             }
         }
-    ]
+    ])
 };
