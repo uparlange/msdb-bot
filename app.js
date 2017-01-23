@@ -44,6 +44,11 @@ server.get('/api/regexps', function (req, res, next) {
     next();
 });
 
+server.get('/api/dialogs', function (req, res, next) {
+    res.send(Shell.getDialogs(req.query.id));
+    next();
+});
+
 server.get(/\/admin\/?.*/, restify.serveStatic({
     directory: __dirname,
     default: 'index.html'

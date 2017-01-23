@@ -29,6 +29,26 @@ module.exports = {
     getLocales: function () {
         return _locales;
     },
+    getDialogs: function () {
+        const result = [];
+        const files = fs.readdirSync(_DIALOGS_DIR);
+        files.forEach((element) => {
+            const file = _DIALOGS_DIR + '/' + element;
+            const name = element.replace('.js', '');
+            const content = fs.readFileSync(file, 'utf-8');
+            let dialogName = this.getDialogName(name);
+            if (dialogName === this.getDialogName('MAIN')) {
+                dialogName = _DIALOG_MAIN;
+            }
+            result.push({
+                name: name,
+                file: file,
+                content: content,
+                dialogName: dialogName
+            });
+        });
+        return result;
+    },
     getDialog: function (dialog) {
         dialog.unshift((session, args, next) => {
             const spl = session.preferredLocale();
@@ -102,20 +122,15 @@ module.exports = {
         });
     },
     _initDialogs: function () {
-        const files = fs.readdirSync(_DIALOGS_DIR);
+        const files = this.getDialogs();
         files.forEach((element) => {
-            const desc = require(_DIALOGS_DIR + '/' + element);
-            const fileName = element.replace('.js', '');
-            let dialogName = this.getDialogName(fileName);
-            if (dialogName === this.getDialogName('MAIN')) {
-                dialogName = _DIALOG_MAIN;
+            const desc = require(element.file);
+            const dialog = _bot.dialog(element.dialogName, desc.dialog);
+            if (element.dialogName !== _DIALOG_MAIN) {
+                dialog.triggerAction({ matches: this.getIntentName(element.name) });
             }
-            const dialog = _bot.dialog(dialogName, desc.dialog);
-            if (dialogName !== _DIALOG_MAIN) {
-                dialog.triggerAction({ matches: this.getIntentName(fileName) });
-            }
-            dialog.beginDialogAction(dialogName + '_HELP', this.getDialogName('HELP'), { matches: this.getIntentName('HELP') });
-            dialog.beginDialogAction(dialogName + '_CANCEL', this.getDialogName('CANCEL'), { matches: this.getIntentName('CANCEL') });
+            dialog.beginDialogAction(element.dialogName + '_HELP', this.getDialogName('HELP'), { matches: this.getIntentName('HELP') });
+            dialog.beginDialogAction(element.dialogName + '_CANCEL', this.getDialogName('CANCEL'), { matches: this.getIntentName('CANCEL') });
         });
     },
     _initEndConversation: function () {
