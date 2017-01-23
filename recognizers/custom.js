@@ -1,4 +1,4 @@
-const Model = require('./../Model');
+const Model = require('./../model/Model');
 
 module.exports = {
     recognizer: {

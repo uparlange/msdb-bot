@@ -1,7 +1,7 @@
 const restify = require('restify');
 const builder = require('botbuilder');
 const Shell = require('./Shell');
-const Model = require('./Model');
+const Model = require('./model/Model');
 const fs = require('fs');
 
 // init env
@@ -38,10 +38,12 @@ server.get('/api/intents', function (req, res, next) {
     res.send(Model.getIntents());
     next();
 });
+
 server.get('/api/regexps', function (req, res, next) {
     res.send(Model.getRegexps(req.query.group));
     next();
 });
+
 server.get(/\/admin\/?.*/, restify.serveStatic({
     directory: __dirname,
     default: 'index.html'

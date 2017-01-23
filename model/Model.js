@@ -1,12 +1,14 @@
 const builder = require('botbuilder');
-const Shell = require('./Shell');
+const Shell = require('./../Shell');
+
+const _LOCALE_DIR = './locale';
 
 module.exports = {
     getIntents: function () {
-        return require('./model/intents.json');
+        return require('./intents.json');
     },
     getRegexps4locale: function (locale) {
-        return require('./locale/' + locale + '/regexp.json');
+        return require(_LOCALE_DIR + '/' + locale + '/regexp.json');
     },
     getRegexps: function (group) {
         const result = [];
