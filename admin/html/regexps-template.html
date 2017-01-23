@@ -1,0 +1,26 @@
+<form>
+    <div class="form-group">
+        <label for="locale">Langue</label>
+        <select name="locale" class="form-control" id="locale" [(ngModel)]="locales.selectedValue">
+            <option *ngFor="let locale of locales.provider" [ngValue]="locale">{{locale}}</option>
+        </select>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>GROUP</th>
+            <th>VALUE</th>
+        </tr>
+    </thead>
+    <tbody>
+        <ng-container *ngFor="let regexp of provider">
+            <tr *ngIf="regexp.locale === locales.selectedValue">
+                <td>{{regexp.group}}</td>
+                <td>
+                    <input type="text" class="form-control" [(ngModel)]="regexp.value" disabled>
+                </td>
+            </tr>
+        </ng-container>
+    </tbody>
+</table>

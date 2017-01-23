@@ -1,8 +1,38 @@
-{
-    "REGEXP_GOODBYE": "(au revoir)",
-    "REGEXP_FIND_GAME": "(trouver|jouer|rechercher)",
-    "REGEXP_HELP": "(aide)",
-    "REGEXP_INFO": "(info|information)",
-    "REGEXP_CANCEL": "(annuler)",
-    "REGEXP_CHANGE_LANGUAGE": "(changer.*langue)"
-}
+[
+    {
+        "group": "REGEXP_GOODBYE",
+        "value": "(au revoir)"
+    },
+    {
+        "group": "REGEXP_FIND_GAME",
+        "value": "(trouver)"
+    },
+    {
+        "group": "REGEXP_FIND_GAME",
+        "value": "(jouer)"
+    },
+    {
+        "group": "REGEXP_FIND_GAME",
+        "value": "(rechercher)"
+    },
+    {
+        "group": "REGEXP_HELP",
+        "value": "(aide)"
+    },
+    {
+        "group": "REGEXP_INFO",
+        "value": "(info)"
+    },
+    {
+        "group": "REGEXP_INFO",
+        "value": "(information)"
+    },
+    {
+        "group": "REGEXP_CANCEL",
+        "value": "(annuler)"
+    },
+    {
+        "group": "REGEXP_CHANGE_LANGUAGE",
+        "value": "(changer.*langue)"
+    }
+]

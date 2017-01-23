@@ -1,6 +1,7 @@
 const restify = require('restify');
 const builder = require('botbuilder');
 const Shell = require('./Shell');
+const Model = require('./Model');
 const fs = require('fs');
 
 // init env
@@ -22,17 +23,31 @@ Shell.init(bot);
 const server = restify.createServer();
 
 server.use(restify.gzipResponse());
+server.use(restify.queryParser());
 
 server.listen(process.env.PORT);
 
 server.post('/api/messages', connector.listen());
 
-server.get(/\/public\/?.*/, restify.serveStatic({
+server.get('/api/locales', function (req, res, next) {
+    res.send(Shell.getLocales());
+    next();
+});
+
+server.get('/api/intents', function (req, res, next) {
+    res.send(Model.getIntents());
+    next();
+});
+server.get('/api/regexps', function (req, res, next) {
+    res.send(Model.getRegexps(req.query.group));
+    next();
+});
+server.get(/\/admin\/?.*/, restify.serveStatic({
     directory: __dirname,
     default: 'index.html'
 }));
 
-server.get(/\/admin\/?.*/, restify.serveStatic({
+server.get(/\/public\/?.*/, restify.serveStatic({
     directory: __dirname,
     default: 'index.html'
 }));
@@ -40,27 +55,3 @@ server.get(/\/admin\/?.*/, restify.serveStatic({
 server.get(/\/node_modules\/?.*/, restify.serveStatic({
     directory: __dirname
 }));
-
-server.get('/api/intents', function (req, res, next) {
-    const intents = require('./model/intents.json');
-    const regexps = {};
-    const locales = [];
-    const files = fs.readdirSync('./locale');
-    files.forEach((locale) => {
-        locales.push(locale);
-        regexps[locale] = require('./locale/' + locale + '/regexp');
-    });
-    intents.forEach((intent) => {
-        intent.regexps.forEach((regexp) => {
-            regexp.values = [];
-            locales.forEach((locale) => {
-                regexp.values.push({
-                    locale: locale,
-                    value: regexps[locale][regexp.id]
-                });
-            });
-        });
-    });
-    res.send(intents);
-    next();
-});

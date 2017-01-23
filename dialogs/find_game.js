@@ -3,7 +3,7 @@ const HttpUtils = require('./../utils/HttpUtils');
 const UrlUtils = require('./../utils/UrlUtils');
 const Shell = require('./../Shell');
 
-const MAX_DISPLAYED_ITEMS = 5;
+const _MAX_DISPLAYED_ITEMS = 5;
 
 const getToken = function (callback) {
     const options = { uri: UrlUtils.getInitServiceUrl() };
@@ -31,10 +31,10 @@ module.exports = {
             findGames(results.response, (games) => {
                 const gamesCount = games.length;
                 if (gamesCount > 0) {
-                    session.send(Shell.getLabel('L10N_GAMES_FOUND', [gamesCount, Math.min(MAX_DISPLAYED_ITEMS, gamesCount)]));
+                    session.send(Shell.getLabel('L10N_GAMES_FOUND', [gamesCount, Math.min(_MAX_DISPLAYED_ITEMS, gamesCount)]));
                     const cards = [];
                     games.forEach((element, index) => {
-                        if (index < MAX_DISPLAYED_ITEMS) {
+                        if (index < _MAX_DISPLAYED_ITEMS) {
                             cards.push(new builder.HeroCard(session)
                                 .title(element.description)
                                 .images([

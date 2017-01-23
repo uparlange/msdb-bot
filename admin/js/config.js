@@ -1,7 +1,6 @@
 SystemJS.config({
 	paths: {
-		"app:": "js/",
-		"npm:": "node_modules/"
+		"app:": "js/"
 	},
 	packages: {
 		"app:": {

@@ -1,56 +1,38 @@
 [
     {
         "description": "Rechercher un jeu",
-        "id": "INTENT_FIND_GAME",
-        "regexps": [
-            {
-                "id": "REGEXP_FIND_GAME"
-            }
-        ]
+        "name": "INTENT_FIND_GAME",
+        "regexpGroup": "REGEXP_FIND_GAME",
+        "dialogId": "DIALOG_FIND_GAME"
     },
     {
         "description": "Arrêter la conversation",
-        "id": "INTENT_GOODBYE",
-        "regexps": [
-            {
-                "id": "REGEXP_GOODBYE"
-            }
-        ]
+        "name": "INTENT_GOODBYE",
+        "regexpGroup": "REGEXP_GOODBYE",
+        "dialogId": "DIALOG_GOODBYE"
     },
     {
         "description": "Demander de l'aide",
-        "id": "INTENT_HELP",
-        "regexps": [
-            {
-                "id": "REGEXP_HELP"
-            }
-        ]
+        "name": "INTENT_HELP",
+        "regexpGroup": "REGEXP_HELP",
+        "dialogId": "DIALOG_HELP"
     },
     {
         "description": "Demander de l'information",
-        "id": "INTENT_INFO",
-        "regexps": [
-            {
-                "id": "REGEXP_INFO"
-            }
-        ]
+        "name": "INTENT_INFO",
+        "regexpGroup": "REGEXP_INFO",
+        "dialogId": "DIALOG_INFO"
     },
     {
         "description": "Annuler l'action en cours",
-        "id": "INTENT_CANCEL",
-        "regexps": [
-            {
-                "id": "REGEXP_CANCEL"
-            }
-        ]
+        "name": "INTENT_CANCEL",
+        "regexpGroup": "REGEXP_CANCEL",
+        "dialogId": "DIALOG_CANCEL"
     },
     {
         "description": "Mettre à jour la langue",
-        "id": "INTENT_CHANGE_LANGUAGE",
-        "regexps": [
-            {
-                "id": "REGEXP_CHANGE_LANGUAGE"
-            }
-        ]
+        "name": "INTENT_CHANGE_LANGUAGE",
+        "regexpGroup": "REGEXP_CHANGE_LANGUAGE",
+        "dialogId": "DIALOG_CHANGE_LANGUAGE"
     }
 ]

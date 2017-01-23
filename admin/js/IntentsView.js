@@ -4,16 +4,14 @@ define(["app:AppUtils"],
 			constructor: [ng.http.Http,
 			function IntentsView(Http) {
 				this._http = Http;
-				this.intents = [];
+				this.provider = [];
 			}
 			],
 			ngOnInit: function () {
-				this._http.get("/api/intents").subscribe((result) => {
-					this.intents = result.json();
-				})
-			},
-			getDialogId:function(intentId) {
-				return intentId.replace("INTENT_", "DIALOG_")
+				const url = "/api/intents";
+				this._http.get(url).subscribe((result) => {
+					this.provider = result.json();
+				});
 			}
 		});
 	});

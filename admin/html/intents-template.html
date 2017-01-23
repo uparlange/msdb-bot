@@ -1,25 +1,22 @@
 <table class="table">
     <thead>
         <tr>
-            <th>ID</th>
+            <th>NAME</th>
             <th>DESCRIPTION</th>
-            <th>REGEXP</th>
+            <th>REGEXP GROUP</th>
             <th>DIALOG ID</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let intent of intents">
-            <td>{{intent.id}}</td>
+        <tr *ngFor="let intent of provider">
+            <td>{{intent.name}}</td>
             <td>{{intent.description}}</td>
             <td>
-                <div *ngFor="let regexp of intent.regexps">
-                    {{regexp.id}}
-                    <div *ngFor="let value of regexp.values">
-                        {{value.locale}} : {{value.value}}
-                    </div>
-                </div>
+                <a [routerLink]="['/regexps']" [queryParams]="{group:intent.regexpGroup}">{{intent.regexpGroup}}</a>
             </td>
-            <td>{{getDialogId(intent.id)}}</td>
+            <td>
+                <a [routerLink]="['/dialogs']" [queryParams]="{id:intent.dialogId}">{{intent.dialogId}}</a>
+            </td>
         </tr>
     </tbody>
 </table>
