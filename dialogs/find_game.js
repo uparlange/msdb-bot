@@ -1,7 +1,7 @@
-const builder = require('botbuilder');
-const HttpUtils = require('./../utils/HttpUtils');
-const UrlUtils = require('./../utils/UrlUtils');
-const Shell = require('./../Shell');
+const builder = require("botbuilder");
+const HttpUtils = require("./../utils/HttpUtils");
+const UrlUtils = require("./../utils/UrlUtils");
+const Shell = require("./../Shell");
 
 const _MAX_DISPLAYED_ITEMS = 5;
 
@@ -24,14 +24,14 @@ const findGames = function (gameName, callback) {
 module.exports = {
     dialog: Shell.getDialog([
         function (session) {
-            builder.Prompts.text(session, 'L10N_PROMPT_GAME_NAME');
+            builder.Prompts.text(session, "L10N_PROMPT_GAME_NAME");
         },
         function (session, results) {
             session.sendTyping();
             findGames(results.response, (games) => {
                 const gamesCount = games.length;
                 if (gamesCount > 0) {
-                    session.send(Shell.getLabel('L10N_GAMES_FOUND', [gamesCount, Math.min(_MAX_DISPLAYED_ITEMS, gamesCount)]));
+                    session.send(Shell.getLabel("L10N_GAMES_FOUND", [gamesCount, Math.min(_MAX_DISPLAYED_ITEMS, gamesCount)]));
                     const cards = [];
                     games.forEach((element, index) => {
                         if (index < _MAX_DISPLAYED_ITEMS) {
@@ -41,7 +41,7 @@ module.exports = {
                                     builder.CardImage.create(session, UrlUtils.getGameTitlesUrl(element.name))
                                 ])
                                 .buttons([
-                                    builder.CardAction.openUrl(session, UrlUtils.getGameDetailUrl(element.name), 'L10N_CONSULT')
+                                    builder.CardAction.openUrl(session, UrlUtils.getGameDetailUrl(element.name), "L10N_CONSULT")
                                 ]));
                         }
                     });
@@ -51,23 +51,23 @@ module.exports = {
                     session.send(msg);
                 }
                 else {
-                    session.send('L10N_NO_RESULT');
+                    session.send("L10N_NO_RESULT");
                 }
-                const L10N_YES = Shell.getLabel('L10N_YES');
-                const L10N_NO = Shell.getLabel('L10N_NO');
-                builder.Prompts.choice(session, 'L10N_PROMPT_NEW_SEARCH', [L10N_YES, L10N_NO]);
+                const L10N_YES = Shell.getLabel("L10N_YES");
+                const L10N_NO = Shell.getLabel("L10N_NO");
+                builder.Prompts.choice(session, "L10N_PROMPT_NEW_SEARCH", [L10N_YES, L10N_NO]);
             });
         },
         function (session, results) {
             const selection = results.response.entity;
-            const L10N_YES = Shell.getLabel('L10N_YES');
-            const L10N_NO = Shell.getLabel('L10N_NO');
+            const L10N_YES = Shell.getLabel("L10N_YES");
+            const L10N_NO = Shell.getLabel("L10N_NO");
             switch (selection) {
                 case L10N_YES:
-                    session.replaceDialog('DIALOG_FIND_GAME');
+                    session.replaceDialog("DIALOG_FIND_GAME");
                     break;
                 case L10N_NO:
-                    session.replaceDialog('DIALOG_MENU');
+                    session.replaceDialog("DIALOG_MENU");
                     break;
             }
         }

@@ -1,14 +1,14 @@
-const builder = require('botbuilder');
-const Shell = require('./../Shell');
+const builder = require("botbuilder");
+const Shell = require("./../Shell");
 
-const _LOCALE_DIR = './locale';
+const _LOCALE_DIR = "./locale";
 
 module.exports = {
     getIntents: function () {
-        return require('./intents.json');
+        return require("./intents.json");
     },
     getRegexps4locale: function (locale) {
-        return require(_LOCALE_DIR + '/' + locale + '/regexp.json');
+        return require(_LOCALE_DIR + "/" + locale + "/regexp.json");
     },
     getRegexps: function (group) {
         const result = [];
@@ -34,7 +34,7 @@ module.exports = {
             const regexps = this.getRegexps4locale(Shell.getLocale());
             regexps.forEach((regexp) => {
                 const regexpGroup = regexp.group;
-                if (message.search(new RegExp(regexp.value, 'i')) !== -1) {
+                if (message.search(new RegExp(regexp.value, "i")) !== -1) {
                     intents.forEach((intent) => {
                         if (regexpGroup === intent.regexpGroup) {
                             result = {

@@ -1,1 +1,17 @@
-Dialogs
+<table class="table">
+    <thead>
+        <tr>
+            <th>DIALOG NAME</th>
+            <th>FILE NAME</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dialog of provider">
+            <td>
+                <a [routerLink]="['/dialogs']" [queryParams]="{id:dialog.dialogName}">{{dialog.dialogName}}</a>
+            </td>
+            <td>{{dialog.file}}</td>
+        </tr>
+    </tbody>
+</table>
+<srccode source="{{selectedDialog.content}}" *ngIf="selectedDialog !== null"></srccode>

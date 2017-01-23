@@ -1,5 +1,6 @@
 define(["app:CommonModule", "app:AppView", "app:AppUtils", "app:LocalesModel"],
 	function (CommonModule, AppView, AppUtils, LocalesModel) {
+		ng.core.enableProdMode();
 		ng.platformBrowserDynamic.platformBrowserDynamic().bootstrapModule(
 			ng.core.NgModule({
 				imports: [

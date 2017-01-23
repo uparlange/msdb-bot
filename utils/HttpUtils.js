@@ -1,4 +1,4 @@
-const rp = require('request-promise');
+const rp = require("request-promise");
 
 const call = function (options, callback, defaultValue) {
     rp(options).then((result) => {
@@ -10,7 +10,7 @@ const call = function (options, callback, defaultValue) {
 
 module.exports = {
     get: function (options, callback, defaultValue) {
-        const params = Object.assign({ method: 'GET', json: true }, options);
+        const params = Object.assign({ method: "GET", json: true }, options);
         call(params, callback, defaultValue)
     }
 };

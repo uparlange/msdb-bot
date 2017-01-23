@@ -1,14 +1,14 @@
-const builder = require('botbuilder');
-const fs = require('fs');
+const builder = require("botbuilder");
+const fs = require("fs");
 
-const _LOCALE_DIR = './locale';
-const _RECOGNIZERS_DIR = './recognizers';
-const _DIALOGS_DIR = './dialogs';
-const _DIALOG_MAIN = '/';
+const _LOCALE_DIR = "./locale";
+const _RECOGNIZERS_DIR = "./recognizers";
+const _DIALOGS_DIR = "./dialogs";
+const _DIALOG_MAIN = "/";
 
 let _bot = null;
 let _locales = [];
-let _preferredLocale = 'fr';
+let _preferredLocale = "fr";
 
 module.exports = {
     init: function (botInstance) {
@@ -29,23 +29,25 @@ module.exports = {
     getLocales: function () {
         return _locales;
     },
-    getDialogs: function () {
+    getDialogs: function (id) {
         const result = [];
         const files = fs.readdirSync(_DIALOGS_DIR);
         files.forEach((element) => {
-            const file = _DIALOGS_DIR + '/' + element;
-            const name = element.replace('.js', '');
-            const content = fs.readFileSync(file, 'utf-8');
+            const file = _DIALOGS_DIR + "/" + element;
+            const name = element.replace(".js", "");
+            const content = fs.readFileSync(file, "utf-8");
             let dialogName = this.getDialogName(name);
-            if (dialogName === this.getDialogName('MAIN')) {
+            if (dialogName === this.getDialogName("MAIN")) {
                 dialogName = _DIALOG_MAIN;
             }
-            result.push({
-                name: name,
-                file: file,
-                content: content,
-                dialogName: dialogName
-            });
+            if (id === undefined || id === dialogName) {
+                result.push({
+                    name: name,
+                    file: file,
+                    content: content,
+                    dialogName: dialogName
+                });
+            }
         });
         return result;
     },
@@ -63,11 +65,11 @@ module.exports = {
     },
     getLabel: function (key, params) {
         const locale = this.getLocale();
-        const labels = require(_LOCALE_DIR + '/' + locale + '/index.json');
+        const labels = require(_LOCALE_DIR + "/" + locale + "/index.json");
         let label = labels[key] || key;
         if (Array.isArray(params)) {
             params.forEach((element, index) => {
-                label = label.replace('{' + index + '}', element)
+                label = label.replace("{" + index + "}", element)
             });
         }
         return label;
@@ -86,10 +88,10 @@ module.exports = {
         return _preferredLocale;
     },
     getDialogName: function (fileName) {
-        return 'DIALOG_' + fileName.toUpperCase();
+        return "DIALOG_" + fileName.toUpperCase();
     },
     getIntentName: function (fileName) {
-        return 'INTENT_' + fileName.toUpperCase();
+        return "INTENT_" + fileName.toUpperCase();
     },
     _initLocales: function () {
         const dirs = fs.readdirSync(_LOCALE_DIR);
@@ -98,9 +100,9 @@ module.exports = {
         });
     },
     _initEvents: function () {
-        _bot.on('conversationUpdate', (message) => {
+        _bot.on("conversationUpdate", (message) => {
             /*
-            const L10N_HELLO = this.getLabel('L10N_HELLO');
+            const L10N_HELLO = this.getLabel("L10N_HELLO");
             if (message.membersAdded) {
                 message.membersAdded.forEach(identity => {
                     if (identity.id === message.address._bot.id) {
@@ -117,7 +119,7 @@ module.exports = {
     _initRecognizers: function () {
         const files = fs.readdirSync(_RECOGNIZERS_DIR);
         files.forEach((element) => {
-            const desc = require(_RECOGNIZERS_DIR + '/' + element);
+            const desc = require(_RECOGNIZERS_DIR + "/" + element);
             _bot.recognizer(desc.recognizer);
         });
     },
@@ -129,12 +131,12 @@ module.exports = {
             if (element.dialogName !== _DIALOG_MAIN) {
                 dialog.triggerAction({ matches: this.getIntentName(element.name) });
             }
-            dialog.beginDialogAction(element.dialogName + '_HELP', this.getDialogName('HELP'), { matches: this.getIntentName('HELP') });
-            dialog.beginDialogAction(element.dialogName + '_CANCEL', this.getDialogName('CANCEL'), { matches: this.getIntentName('CANCEL') });
+            dialog.beginDialogAction(element.dialogName + "_HELP", this.getDialogName("HELP"), { matches: this.getIntentName("HELP") });
+            dialog.beginDialogAction(element.dialogName + "_CANCEL", this.getDialogName("CANCEL"), { matches: this.getIntentName("CANCEL") });
         });
     },
     _initEndConversation: function () {
-        _bot.endConversationAction(this.getDialogName('GOODBYE'), 'L10N_SEE_YOU_LATER', { matches: this.getIntentName('GOODBYE') });
+        _bot.endConversationAction(this.getDialogName("GOODBYE"), "L10N_SEE_YOU_LATER", { matches: this.getIntentName("GOODBYE") });
     },
     _initLogs: function () {
         _bot.use({
