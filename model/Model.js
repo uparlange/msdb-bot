@@ -31,7 +31,7 @@ module.exports = {
         let result = null;
         if (message) {
             const intents = this.getIntents();
-            const regexps = this.getRegexps4locale(Shell.getLocale());
+            const regexps = this.getRegexps4locale(Shell.getPreferredLocale());
             regexps.forEach((regexp) => {
                 const regexpGroup = regexp.group;
                 if (message.search(new RegExp(regexp.value, "i")) !== -1) {

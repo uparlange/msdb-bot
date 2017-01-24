@@ -2,7 +2,7 @@ const Shell = require("./../Shell");
 
 module.exports = {
     label: "/",
-    dialog: Shell.getDialog([
+    dialog: Shell.getDialogDescription([
         function (session) {
             session.beginDialog("DIALOG_MENU");
         }

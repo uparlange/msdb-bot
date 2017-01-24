@@ -2,7 +2,7 @@ const builder = require("botbuilder");
 const Shell = require("./../Shell");
 
 module.exports = {
-    dialog: Shell.getDialog([
+    dialog: Shell.getDialogDescription([
         function (session) {
             builder.Prompts.choice(session, "L10N_PROMPT_LANGUAGE", "Français|English");
         },

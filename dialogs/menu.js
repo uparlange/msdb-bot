@@ -2,7 +2,7 @@ const builder = require("botbuilder");
 const Shell = require("./../Shell");
 
 module.exports = {
-    dialog: Shell.getDialog([
+    dialog: Shell.getDialogDescription([
         function (session) {
             const L10N_FIND_GAME = Shell.getLabel("L10N_FIND_GAME");
             builder.Prompts.choice(session, "L10N_PROMPT_SELECT_ACTIVITY", [L10N_FIND_GAME]);

@@ -3,7 +3,7 @@ const UrlUtils = require("./../utils/UrlUtils");
 const Shell = require("./../Shell");
 
 module.exports = {
-    dialog: Shell.getDialog([
+    dialog: Shell.getDialogDescription([
         function (session) {
             const card = new builder.HeroCard(session)
                 .title("L10N_MAME_TITLE")

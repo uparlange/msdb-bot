@@ -2,7 +2,7 @@ const builder = require("botbuilder");
 const Shell = require("./../Shell");
 
 module.exports = {
-    dialog: Shell.getDialog([
+    dialog: Shell.getDialogDescription([
         function (session) {
             const L10N_YES = Shell.getLabel("L10N_YES");
             const L10N_NO = Shell.getLabel("L10N_NO");

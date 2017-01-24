@@ -22,7 +22,7 @@ const findGames = function (gameName, callback) {
 }
 
 module.exports = {
-    dialog: Shell.getDialog([
+    dialog: Shell.getDialogDescription([
         function (session) {
             builder.Prompts.text(session, "L10N_PROMPT_GAME_NAME");
         },

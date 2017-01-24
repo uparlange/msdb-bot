@@ -1,7 +1,7 @@
 const Shell = require("./../Shell");
 
 module.exports = {
-    dialog: Shell.getDialog([
+    dialog: Shell.getDialogDescription([
         function (session, args) {
             const label = Shell.getLabel(args.action);
             if (label !== args.action) {
