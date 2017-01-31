@@ -4,6 +4,7 @@
             <th>NAME</th>
             <th>DESCRIPTION</th>
             <th>REGEXP GROUP</th>
+            <th>ENTITIES</th>
             <th>DIALOG ID</th>
         </tr>
     </thead>
@@ -15,7 +16,13 @@
                 <a [routerLink]="['/regexps']" [queryParams]="{group:intent.regexpGroup}">{{intent.regexpGroup}}</a>
             </td>
             <td>
-                <a [routerLink]="['/dialogs']" [queryParams]="{id:intent.dialogId}">{{intent.dialogId}}</a>
+                <a [routerLink]="['/entities']" [queryParams]="{name:entity}" *ngFor="let entity of intent.entities; let last=last">
+                    <span>{{entity}}</span>
+                    <span *ngIf="!last">,</span>
+                </a>
+            </td>
+            <td>
+                <a [routerLink]="['/dialogs']" [queryParams]="{name:intent.dialogName}">{{intent.dialogName}}</a>
             </td>
         </tr>
     </tbody>

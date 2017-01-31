@@ -7,6 +7,20 @@ module.exports = {
     getIntents: function () {
         return require("./intents.json");
     },
+    getEntities: function (name) {
+        const entities = require("./entities.json");
+        let result = [];
+        if (name !== undefined) {
+            entities.forEach((entity) => {
+                if (entity.name === name) {
+                    result.push(entity);
+                }
+            });
+        } else {
+            result = entities;
+        }
+        return result;
+    },
     getRegexps4locale: function (locale) {
         return require(_LOCALE_DIR + "/" + locale + "/regexp.json");
     },
@@ -30,30 +44,38 @@ module.exports = {
     recognize: function (message) {
         let result = null;
         if (message) {
-            const intents = this.getIntents();
-            const regexps = this.getRegexps4locale(Shell.getPreferredLocale());
-            regexps.forEach((regexp) => {
-                const regexpGroup = regexp.group;
-                if (message.search(new RegExp(regexp.value, "i")) !== -1) {
-                    intents.forEach((intent) => {
-                        if (regexpGroup === intent.regexpGroup) {
-                            result = {
-                                score: 1.0,
-                                intent: intent.name,
-                                entities: []
-                            };
-                            return;
-                        }
-                    });
-                }
-                if (result !== null) {
-                    return;
-                }
-            });
+            result = this._getIntent(message);
         }
         if (result === null) {
             result = { score: 0.0 };
         }
         return result;
+    },
+    _getIntent: function (message) {
+        let result = null;
+        const intents = this.getIntents();
+        const regexps = this.getRegexps4locale(Shell.getPreferredLocale());
+        regexps.forEach((regexp) => {
+            const regexpGroup = regexp.group;
+            if (message.search(new RegExp(regexp.value, "i")) !== -1) {
+                intents.forEach((intent) => {
+                    if (regexpGroup === intent.regexpGroup) {
+                        result = {
+                            score: 1.0,
+                            intent: intent.name,
+                            entities: this._getEntities(message, intent.entities)
+                        };
+                        return;
+                    }
+                });
+            }
+            if (result !== null) {
+                return;
+            }
+        });
+        return result;
+    },
+    _getEntities: function (message, entities) {
+        return [];
     }
 };

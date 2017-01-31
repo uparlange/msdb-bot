@@ -2,37 +2,41 @@
     {
         "description": "Rechercher un jeu",
         "name": "INTENT_FIND_GAME",
-        "regexpGroup": "REGEXP_FIND_GAME",
-        "dialogId": "DIALOG_FIND_GAME"
+        "regexpGroup": "REGEXP_INTENT_FIND_GAME",
+        "dialogName": "DIALOG_FIND_GAME",
+        "entities": [
+            "ENTITY_YEAR",
+            "ENTITY_SERIES"
+        ]
     },
     {
         "description": "Arrêter la conversation",
         "name": "INTENT_GOODBYE",
-        "regexpGroup": "REGEXP_GOODBYE",
-        "dialogId": "DIALOG_GOODBYE"
+        "regexpGroup": "REGEXP_INTENT_GOODBYE",
+        "dialogName": "DIALOG_GOODBYE"
     },
     {
         "description": "Demander de l'aide",
         "name": "INTENT_HELP",
-        "regexpGroup": "REGEXP_HELP",
-        "dialogId": "DIALOG_HELP"
+        "regexpGroup": "REGEXP_INTENT_HELP",
+        "dialogName": "DIALOG_HELP"
     },
     {
         "description": "Demander de l'information",
         "name": "INTENT_INFO",
-        "regexpGroup": "REGEXP_INFO",
-        "dialogId": "DIALOG_INFO"
+        "regexpGroup": "REGEXP_INTENT_INFO",
+        "dialogName": "DIALOG_INFO"
     },
     {
         "description": "Annuler l'action en cours",
         "name": "INTENT_CANCEL",
-        "regexpGroup": "REGEXP_CANCEL",
-        "dialogId": "DIALOG_CANCEL"
+        "regexpGroup": "REGEXP_INTENT_CANCEL",
+        "dialogName": "DIALOG_CANCEL"
     },
     {
         "description": "Mettre à jour la langue",
         "name": "INTENT_CHANGE_LANGUAGE",
-        "regexpGroup": "REGEXP_CHANGE_LANGUAGE",
-        "dialogId": "DIALOG_CHANGE_LANGUAGE"
+        "regexpGroup": "REGEXP_INTENT_CHANGE_LANGUAGE",
+        "dialogName": "DIALOG_CHANGE_LANGUAGE"
     }
 ]

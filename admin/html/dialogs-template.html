@@ -8,7 +8,7 @@
     <tbody>
         <tr *ngFor="let dialog of provider">
             <td>
-                <a [routerLink]="['/dialogs']" [queryParams]="{id:dialog.dialogName}">{{dialog.dialogName}}</a>
+                <a [routerLink]="['/dialogs']" [queryParams]="{name:dialog.dialogName}">{{dialog.dialogName}}</a>
             </td>
             <td>{{dialog.file}}</td>
         </tr>

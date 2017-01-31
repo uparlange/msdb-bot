@@ -1,0 +1,18 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>NAME</th>
+            <th>DESCRIPTION</th>
+            <th>REGEXP GROUP</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let entity of provider">
+            <td>{{entity.name}}</td>
+            <td>{{entity.description}}</td>
+            <td>
+                <a [routerLink]="['/regexps']" [queryParams]="{group:entity.regexpGroup}">{{entity.regexpGroup}}</a>
+            </td>
+        </tr>
+    </tbody>
+</table>

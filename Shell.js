@@ -29,20 +29,20 @@ module.exports = {
     getLocales: function () {
         return _locales;
     },
-    getDialogs: function (id) {
+    getDialogs: function (name) {
         const result = [];
         const files = fs.readdirSync(_DIALOGS_DIR);
         files.forEach((element) => {
             const file = _DIALOGS_DIR + "/" + element;
-            const name = element.replace(".js", "");
+            const fileName = element.replace(".js", "");
             const content = fs.readFileSync(file, "utf-8");
-            let dialogName = this._getDialogName(name);
+            let dialogName = this._getDialogName(fileName);
             if (dialogName === this._getDialogName("MAIN")) {
                 dialogName = _DIALOG_MAIN;
             }
-            if (id === undefined || id === dialogName) {
+            if (name === undefined || name === dialogName) {
                 result.push({
-                    name: name,
+                    name: fileName,
                     file: file,
                     content: content,
                     dialogName: dialogName

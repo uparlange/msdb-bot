@@ -6,14 +6,6 @@ define(["app:AppUtils"],
 				this._http = Http;
 				this.intents = [];
 			}
-			],
-			ngOnInit: function () {
-				this._http.get("/api/intents").subscribe((result) => {
-					this.intents = result.json();
-				})
-			},
-			getDialogId: function (intentId) {
-				return intentId.replace("INTENT_", "DIALOG_")
-			}
+			]
 		});
 	});

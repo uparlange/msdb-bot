@@ -1,0 +1,12 @@
+[
+    {
+        "description": "Année",
+        "name": "ENTITY_YEAR",
+        "regexpGroup": "REGEXP_ENTITY_YEAR"
+    },
+    {
+        "description": "Série",
+        "name": "ENTITY_SERIES",
+        "regexpGroup": "REGEXP_ENTITY_SERIES"
+    }
+]

@@ -1,38 +1,46 @@
 [
     {
-        "group": "REGEXP_GOODBYE",
+        "group": "REGEXP_INTENT_GOODBYE",
         "value": "(au revoir)"
     },
     {
-        "group": "REGEXP_FIND_GAME",
+        "group": "REGEXP_INTENT_FIND_GAME",
         "value": "(trouver)"
     },
     {
-        "group": "REGEXP_FIND_GAME",
+        "group": "REGEXP_INTENT_FIND_GAME",
         "value": "(jouer)"
     },
     {
-        "group": "REGEXP_FIND_GAME",
+        "group": "REGEXP_INTENT_FIND_GAME",
         "value": "(rechercher)"
     },
     {
-        "group": "REGEXP_HELP",
+        "group": "REGEXP_INTENT_HELP",
         "value": "(aide)"
     },
     {
-        "group": "REGEXP_INFO",
+        "group": "REGEXP_INTENT_INFO",
         "value": "(info)"
     },
     {
-        "group": "REGEXP_INFO",
+        "group": "REGEXP_INTENT_INFO",
         "value": "(information)"
     },
     {
-        "group": "REGEXP_CANCEL",
+        "group": "REGEXP_INTENT_CANCEL",
         "value": "(annuler)"
     },
     {
-        "group": "REGEXP_CHANGE_LANGUAGE",
+        "group": "REGEXP_INTENT_CHANGE_LANGUAGE",
         "value": "(changer.*langue)"
+    },
+    {
+        "group": "REGEXP_ENTITY_YEAR",
+        "value": "[0-9]{4}"
+    },
+    {
+        "group": "REGEXP_ENTITY_SERIES",
+        "value": "(série)"
     }
 ]

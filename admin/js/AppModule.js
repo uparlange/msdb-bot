@@ -11,7 +11,8 @@ define(["app:CommonModule", "app:AppView", "app:AppUtils", "app:LocalesModel"],
 						{ path: "home", loadChildren: AppUtils.getModuleName("HomeModule") },
 						{ path: "intents", loadChildren: AppUtils.getModuleName("IntentsModule") },
 						{ path: "regexps", loadChildren: AppUtils.getModuleName("RegexpsModule") },
-						{ path: "dialogs", loadChildren: AppUtils.getModuleName("DialogsModule") }
+						{ path: "dialogs", loadChildren: AppUtils.getModuleName("DialogsModule") },
+						{ path: "entities", loadChildren: AppUtils.getModuleName("EntitiesModule") }
 					], { useHash: true })
 				],
 				declarations: [

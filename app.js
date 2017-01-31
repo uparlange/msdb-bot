@@ -39,13 +39,18 @@ server.get("/api/intents", function (req, res, next) {
     next();
 });
 
+server.get("/api/entities", function (req, res, next) {
+    res.send(Model.getEntities(req.query.name));
+    next();
+});
+
 server.get("/api/regexps", function (req, res, next) {
     res.send(Model.getRegexps(req.query.group));
     next();
 });
 
 server.get("/api/dialogs", function (req, res, next) {
-    res.send(Shell.getDialogs(req.query.id));
+    res.send(Shell.getDialogs(req.query.name));
     next();
 });
 
