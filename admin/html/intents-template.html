@@ -16,10 +16,10 @@
                 <a [routerLink]="['/regexps']" [queryParams]="{group:intent.regexpGroup}">{{intent.regexpGroup}}</a>
             </td>
             <td>
-                <a [routerLink]="['/entities']" [queryParams]="{name:entity}" *ngFor="let entity of intent.entities; let last=last">
-                    <span>{{entity}}</span>
+                <span *ngFor="let entity of intent.entities; let last=last">
+                    <a [routerLink]="['/entities']" [queryParams]="{name:entity}">{{entity}}</a>
                     <span *ngIf="!last">,</span>
-                </a>
+                </span>
             </td>
             <td>
                 <a [routerLink]="['/dialogs']" [queryParams]="{name:intent.dialogName}">{{intent.dialogName}}</a>
