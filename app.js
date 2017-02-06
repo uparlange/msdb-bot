@@ -29,6 +29,11 @@ server.listen(process.env.PORT);
 
 server.post("/api/messages", connector.listen());
 
+server.get("/api/recognize", function (req, res, next) {
+    res.send(Model.recognize(req.query.phrase));
+    next();
+});
+
 server.get("/api/locales", function (req, res, next) {
     res.send(Shell.getLocales());
     next();

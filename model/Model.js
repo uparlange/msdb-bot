@@ -56,10 +56,9 @@ module.exports = {
         const intents = this.getIntents();
         const regexps = this.getRegexps4locale(Shell.getPreferredLocale());
         regexps.forEach((regexp) => {
-            const regexpGroup = regexp.group;
             if (message.search(new RegExp(regexp.value, "i")) !== -1) {
                 intents.forEach((intent) => {
-                    if (regexpGroup === intent.regexpGroup) {
+                    if (regexp.group === intent.regexpGroup) {
                         result = {
                             score: 1.0,
                             intent: intent.name,
@@ -75,7 +74,27 @@ module.exports = {
         });
         return result;
     },
-    _getEntities: function (message, entities) {
-        return [];
+    _getEntities: function (message, entityNames) {
+        const result = [];
+        if (Array.isArray(entityNames)) {
+            const regexps = this.getRegexps4locale(Shell.getPreferredLocale());
+            regexps.forEach((regexp) => {
+                entityNames.forEach((entityName) => {
+                    const entity = this.getEntities(entityName)[0];
+                    if (entity.regexpGroup === regexp.group) {
+                        const matches = message.match(new RegExp(regexp.value, "gi"));
+                        if (matches !== null) {
+                            matches.forEach((match) => {
+                                result.push({
+                                    "entity": match,
+                                    "type": entity.name
+                                })
+                            });
+                        }
+                    }
+                });
+            });
+        }
+        return result;
     }
 };

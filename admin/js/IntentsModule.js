@@ -1,4 +1,4 @@
-define(["app:CommonModule", "app:IntentsView"],
+define(["CommonModule", "IntentsView"],
 	function (CommonModule, IntentsView) {
 		return {
 			module: ng.core.NgModule({

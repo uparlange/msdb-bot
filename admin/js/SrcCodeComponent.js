@@ -1,4 +1,4 @@
-define(["app:AppUtils"],
+define(["AppUtils"],
     function (AppUtils) {
         return ng.core.Component(AppUtils.getComponentConfiguration("srccode", {
             inputs: ["source"]

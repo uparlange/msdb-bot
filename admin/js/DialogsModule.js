@@ -1,4 +1,4 @@
-define(["app:CommonModule", "app:DialogsView"],
+define(["CommonModule", "DialogsView"],
 	function (CommonModule, DialogsView) {
 		return {
 			module: ng.core.NgModule({

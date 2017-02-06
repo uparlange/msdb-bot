@@ -1,22 +1,22 @@
-define(["CommonModule", "RegexpsView"],
-	function (CommonModule, RegexpsView) {
+define(["CommonModule", "TestView"],
+	function (CommonModule, TestView) {
 		return {
 			module: ng.core.NgModule({
 				imports: [
 					CommonModule,
 					ng.router.RouterModule.forChild([
-						{ path: "", component: RegexpsView }
+						{ path: "", component: TestView }
 					])
 				],
 				declarations: [
-					RegexpsView
+					TestView
 				],
 				providers: [
 
 				]
 			}).Class({
 				constructor: [
-					function RegexpsModule() {
+					function TestModule() {
 
 					}
 				]

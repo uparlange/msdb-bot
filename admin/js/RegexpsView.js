@@ -1,4 +1,4 @@
-define(["app:AppUtils", "app:LocalesModel"],
+define(["AppUtils", "LocalesModel"],
 	function (AppUtils, LocalesModel) {
 		return ng.core.Component(AppUtils.getComponentConfiguration("regexps")).Class({
 			constructor: [ng.http.Http, ng.router.ActivatedRoute, LocalesModel,
@@ -17,7 +17,7 @@ define(["app:AppUtils", "app:LocalesModel"],
 					search.set("group", params.group);
 					this._http.get(url, { search: search }).subscribe((result) => {
 						this.provider = result.json();
-					})
+					});
 				});
 			},
 			ngOnDestroy: function () {

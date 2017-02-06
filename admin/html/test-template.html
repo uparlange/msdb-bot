@@ -1,0 +1,6 @@
+<form class="form-inline" #testForm="ngForm">
+    <input type="text" class="form-control" name="phrase" placeholder="Phrase" required [(ngModel)]="phrase">
+    <button [disabled]="!testForm.form.valid" type="submit" class="btn btn-primary" (click)="test()">Tester</button>
+</form>
+<hr>
+<textarea readonly [ngModel]="intent" class="form-control" rows="10"></textarea>

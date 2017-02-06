@@ -1,4 +1,4 @@
-define(["app:CommonModule", "app:EntitiesView"],
+define(["CommonModule", "EntitiesView"],
 	function (CommonModule, EntitiesView) {
 		return {
 			module: ng.core.NgModule({

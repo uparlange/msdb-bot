@@ -1,4 +1,4 @@
-define(["app:SrcCodeComponent"],
+define(["SrcCodeComponent"],
 	function (SrcCodeComponent) {
 		return ng.core.NgModule({
 			imports: [

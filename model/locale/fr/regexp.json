@@ -5,7 +5,7 @@
     },
     {
         "group": "REGEXP_INTENT_FIND_GAME",
-        "value": "(trouver)"
+        "value": "(trouve)"
     },
     {
         "group": "REGEXP_INTENT_FIND_GAME",
@@ -13,7 +13,7 @@
     },
     {
         "group": "REGEXP_INTENT_FIND_GAME",
-        "value": "(rechercher)"
+        "value": "(recherche)"
     },
     {
         "group": "REGEXP_INTENT_HELP",

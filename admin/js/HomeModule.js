@@ -1,4 +1,4 @@
-define(["app:CommonModule", "app:HomeView"],
+define(["CommonModule", "HomeView"],
 	function (CommonModule, HomeView) {
 		return {
 			module: ng.core.NgModule({
