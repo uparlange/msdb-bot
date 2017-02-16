@@ -56,13 +56,13 @@ module.exports = {
             const spl = session.preferredLocale();
             if (_locales.indexOf(spl) === -1) {
                 this.setLocale(session, _preferredLocale, () => {
-                    next();
+                    next(args);
                 });
             } else if (spl !== _preferredLocale) {
                 _preferredLocale = spl;
-                next();
+                next(args);
             } else {
-                next();
+                next(args);
             }
         });
         return dialog;
